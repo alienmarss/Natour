@@ -1,0 +1,110 @@
+.popup {
+	height: 100vh;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: rgba($color-black, 0.8);
+	z-index: 9999;
+	transition: all 0.5s;
+
+	opacity: 0;
+	visibility: hidden;
+
+	&__content {
+		@include absCenter;
+		width: 75%;
+		display: flex;
+		align-items: center;
+		gap: 6rem;
+		background-color: $color-white;
+		box-shadow: 0 2rem 4rem rgba($color-black, 0.2);
+		border-radius: 3px;
+		overflow: hidden;
+
+		opacity: 0;
+		transform: translate(-50%, -50%) scale(0);
+
+		transition: all 0.5s 0.2s;
+
+		@include respond(tab-port) {
+			flex-direction: column;
+			gap: 1rem;
+		}
+	}
+
+	&__left {
+		width: 33.3333%;
+		@include respond(tab-port) {
+			width: 80%;
+		}
+	}
+
+	&__right {
+		width: 66.666667%;
+		padding: 3rem 5rem;
+		@include respond(tab-port) {
+			width: 80%;
+			padding: 3rem 1rem;
+		}
+	}
+
+	&__img {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+	&__text {
+		font-size: 1.4rem;
+		margin-bottom: 4rem;
+
+		// making 2 columns with text
+		-moz-column-count: 2;
+		-moz-column-gap: 4rem;
+		-moz-column-rule: 1px solid $color-grey-light1-2;
+		column-count: 2;
+		column-gap: 4rem;
+		//adding border between columns
+		column-rule: 1px solid $color-grey-light1-2;
+
+		//making text with hyphens and also to woks it in all browsers we add kits
+		-moz-hyphens: auto;
+		-ms-hyphens: auto;
+		-webkit-hyphens: auto;
+		hyphens: auto;
+	}
+
+	//OPEN STATES
+	//with this sudo class we make our popup window visible
+	&:target {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	&:target &__content {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
+	}
+
+	&__close {
+		&:link,
+		&:visited {
+			color: $color-grey-dark;
+			position: absolute;
+			top: 2.5rem;
+			right: 3.5rem;
+			font-size: 3rem;
+			text-decoration: none;
+			transition: all 0.2s;
+
+			@include respond(tab-port) {
+				top: 1.5rem;
+				right: 1.5rem;
+			}
+		}
+		&:hover {
+			color: $color-primary;
+		}
+	}
+}

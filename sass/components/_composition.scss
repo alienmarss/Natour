@@ -1,0 +1,71 @@
+.composition {
+	// we also have to declare position:relative for parent element
+	position: relative;
+	&__photo {
+		width: 55%;
+		box-shadow: 0 1.5rem 4rem rgba($color-black, 0.4);
+		border-radius: 2px;
+		//With this property we make pictures overlap each other////
+		position: absolute;
+		//implementing z-index to to show picture overlapping when hover it
+		z-index: 1;
+		transition: all 0.2s;
+
+		// making space between picture and green outline
+		outline-offset: 1rem;
+
+		@include respond(tab-port) {
+			display: flex;
+
+			box-shadow: 0 1.5rem 3rem rgba($color-black, 0.2);
+			width: 30%;
+		}
+
+		&--p1 {
+			left: 0;
+			top: 3rem;
+
+			@include respond(tab-port) {
+				top: 0;
+				transform: scale(1.2);
+			}
+		}
+		&--p2 {
+			right: 0;
+			top: 8rem;
+
+			@include respond(tab-port) {
+				top: 0;
+				transform: scale(1.3);
+			}
+		}
+		&--p3 {
+			left: 10rem;
+			top: 16rem;
+
+			@include respond(tab-port) {
+				top: 0;
+				transform: scale(1.4);
+				left: 22rem;
+			}
+			@include respond(phone) {
+				top: -3rem;
+				transform: scale(1.4);
+				left: 13rem;
+			}
+		}
+		//////////////////////////////////////////////////////////
+		//making zoom effect with hover
+		&:hover {
+			transform: scale(1.3) translateX(-1rem);
+			box-shadow: 0 2.5rem 4rem rgba($color-black, 0.5);
+			z-index: 2;
+			// adding nice grin outline
+			outline: 1.5rem solid $color-primary;
+		}
+	}
+	//with this we decrese size of the picture when hover on it
+	&:hover &__photo:not(:hover) {
+		transform: scale(0.96);
+	}
+}
